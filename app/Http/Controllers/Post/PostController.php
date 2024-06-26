@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StoreRequest;
+use App\Http\Requests\Post\UpdateRequest;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -13,12 +14,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view("post.index");
+        $posts = Post::all();
+        return view("post.index", compact("posts"));
     }
 
     public function show(Post $post)
     {
-        $post = Post::findOrFail($post->id);
         return view("post.show", compact("post"));
     }
 
@@ -28,6 +29,14 @@ class PostController extends Controller
     public function storePage()
     {
         return view("post.store");
+    }
+
+    /**
+     * Show the form for update the resource.
+     */
+    public function editPage(Post $post)
+    {
+        return view("post.edit", compact("post"));
     }
 
     /**
@@ -46,7 +55,24 @@ class PostController extends Controller
         $post->save();
         $post->refresh();
 
-        return redirect()->route('posts.show', ['post' => $post->id]);
+        return redirect()->route('post.show', ['post' => $post->id]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function edit(Post $post, UpdateRequest $request)
+    {
+        $post->update($request->only([
+            'title',
+            'author',
+            'content',
+            'category',
+            'keywords',
+        ]));
+        $post->refresh();
+
+        return redirect()->route('post.show', ['post' => $post->id]);
     }
 
 
