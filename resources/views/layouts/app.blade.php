@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Site</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS ссылка -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -82,7 +84,7 @@
             color: #fff;
             text-align: center;
             padding: 1rem 0;
-            margin-top: auto;
+            margin-top: 2rem;
         }
     </style>
 </head>
@@ -91,7 +93,7 @@
     <h1>News Site</h1>
 </header>
 <nav>
-    <a href="#">Home</a>
+    <a href="{{ route('index') }}">Home</a>
     <a href="#">World</a>
     <a href="#">Technology</a>
     <a href="#">Sports</a>

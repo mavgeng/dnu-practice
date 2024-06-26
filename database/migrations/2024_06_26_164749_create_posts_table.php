@@ -19,7 +19,6 @@ return new class extends Migration
             $table->text('content')->nullable(false);
             $table->string('category')->nullable(false);
             $table->string('keywords')->nullable(false);
-            $table->string('image')->nullable(false);
 
             $table->integer('likes')->default(0);
 
