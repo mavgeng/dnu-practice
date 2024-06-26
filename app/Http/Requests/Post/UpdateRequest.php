@@ -23,9 +23,9 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'string|max:255',
-            'author' => 'string|max:255',
-            'content' => 'string',
+            'title' => 'string|max:255|min:5',
+            'author' => 'email',
+            'content' => 'string|min:100',
             'category' => 'string|max:255',
             'keywords' => 'string|max:255',
             //'likes' => 'integer',

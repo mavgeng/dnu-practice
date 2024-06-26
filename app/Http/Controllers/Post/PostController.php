@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
+use App\Models\Category;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -15,12 +16,15 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view("post.index", compact("posts"));
+        $categoriess = Category::all();
+        return view("post.index", compact("posts", "categoriess"));
     }
 
     public function show(Post $post)
     {
-        return view("post.show", compact("post"));
+        $category = Category::find($post->category_id);
+        $categoriess = Category::all();
+        return view("post.show", compact("post", "category", "categoriess"));
     }
 
     /**
@@ -28,7 +32,9 @@ class PostController extends Controller
      */
     public function storePage()
     {
-        return view("post.store");
+        $categoriess = Category::all();
+        $categories = Category::pluck('title', 'id');
+        return view("post.store", compact("categories", "categoriess"));
     }
 
     /**
@@ -36,7 +42,9 @@ class PostController extends Controller
      */
     public function editPage(Post $post)
     {
-        return view("post.edit", compact("post"));
+        $categoriess = Category::all();
+        $categories = Category::pluck('title', 'id');
+        return view("post.edit", compact("post", "categories", "categoriess"));
     }
 
     /**
@@ -48,7 +56,7 @@ class PostController extends Controller
             'title',
             'author',
             'content',
-            'category',
+            'category_id',
             'keywords',
         ]));
 
@@ -67,7 +75,7 @@ class PostController extends Controller
             'title',
             'author',
             'content',
-            'category',
+            'category_id',
             'keywords',
         ]));
         $post->refresh();
@@ -75,5 +83,14 @@ class PostController extends Controller
         return redirect()->route('post.show', ['post' => $post->id]);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function delete(Post $post)
+    {
+        $post->delete();
+
+        return redirect()->route('index');
+    }
 
 }
