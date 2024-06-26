@@ -6,6 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property integer $id
+ * @property string $title
+ * @property string $author
+ * @property string $content
+ * @property string $category
+ * @property string $keywords
+ * @property integer $likes
+ */
 class Post extends Model
 {
     use HasFactory;
@@ -17,7 +26,7 @@ class Post extends Model
         'content',
         'category',
         'keywords',
-        'image',
+        'likes',
     ];
 
     protected $casts = [
@@ -26,7 +35,6 @@ class Post extends Model
         'content' => 'string',
         'category' => 'string',
         'keywords' => 'string',
-        'image' => 'string',
         'likes' => 'integer',
     ];
 }

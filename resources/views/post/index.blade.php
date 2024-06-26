@@ -18,7 +18,7 @@
     </div>
 
     {{-- Button for creating post --}}
-    <form action="{{ route('post.store') }}" method="POST">
+    <form action="{{ route('post.storePage') }}" method="GET">
         @csrf
         <button type="submit" class="create-button">Create Post</button>
     </form>

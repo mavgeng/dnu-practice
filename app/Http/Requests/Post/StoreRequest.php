@@ -28,7 +28,6 @@ class StoreRequest extends FormRequest
             'content' => 'required|string',
             'category' => 'required|string|max:255',
             'keywords' => 'required|string|max:255',
-            'image' => 'required|image',
             'likes' => 'integer',
         ];
     }
