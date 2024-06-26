@@ -94,9 +94,9 @@
 </header>
 <nav>
     <a href="{{ route('index') }}">Home</a>
-    <a href="#">World</a>
-    <a href="#">Technology</a>
-    <a href="#">Sports</a>
+    @foreach ($categoriess as $category)
+        <a href="{{ route('posts.by.category', $category->id) }}">{{ $category->title }}</a>
+    @endforeach
 </nav>
 <div class="content">
     @yield('content')

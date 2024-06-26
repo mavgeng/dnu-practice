@@ -6,6 +6,16 @@
         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}" required>
@@ -22,8 +32,13 @@
             </div>
 
             <div class="form-group">
-                <label for="category">Category</label>
-                <input type="text" id="category" name="category" class="form-control" value="{{ old('category') }}" required>
+                <label for="category_id">Category</label>
+                <select id="category_id" name="category_id" class="form-control" required>
+                    <option value="">Select a category...</option>
+                    @foreach ($categories as $id => $title)
+                        <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>{{ $title }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group">

@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('title')->nullable(false);
             $table->string('author')->nullable(false);
             $table->text('content')->nullable(false);
-            $table->string('category')->nullable(false);
+            $table->unsignedBigInteger('category_id')->nullable(false);
             $table->string('keywords')->nullable(false);
 
-            $table->integer('likes')->default(0);
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
 
             $table->timestamps();
             $table->softDeletes();
