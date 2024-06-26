@@ -1,25 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Latest News</h2>
-    <div class="news-list">
-        <div class="news-item">
-            <h3 class="news-title">News Title 1</h3>
-            <p class="news-summary">Summary of the news article goes here. This is a brief description.</p>
-        </div>
-        <div class="news-item">
-            <h3 class="news-title">News Title 2</h3>
-            <p class="news-summary">Summary of the news article goes here. This is a brief description.</p>
-        </div>
-        <div class="news-item">
-            <h3 class="news-title">News Title 3</h3>
-            <p class="news-summary">Summary of the news article goes here. This is a brief description.</p>
-        </div>
-    </div>
+    <div class="container mt-4">
+        <h2>Latest News</h2>
+        <div class="news-list">
+            @foreach($posts as $post)
+                <div class="news-item">
+                    <h3 class="news-title">{{ $post->title }}</h3>
+                    <p class="news-summary">{{ Str::limit($post->content, 50, '...') }}</p>
 
-    {{-- Button for creating post --}}
-    <form action="{{ route('post.storePage') }}" method="GET">
-        @csrf
-        <button type="submit" class="create-button">Create Post</button>
-    </form>
+                    <a href="{{ route('post.show', ['post' => $post->id]) }}" class="btn btn-outline-dark">Read more</a>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Button for creating post --}}
+        <form action="{{ route('post.storePage') }}" method="GET">
+            @csrf
+            <button type="submit" class="btn btn-dark">Create Post</button>
+        </form>
+    </div>
 @endsection

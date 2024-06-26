@@ -9,8 +9,15 @@
                 <p class="card-text">{{ $post->content }}</p>
                 <p class="card-text"><strong>Category:</strong> {{ $post->category }}</p>
                 <p class="card-text"><strong>Keywords:</strong> {{ $post->keywords }}</p>
-                <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid rounded" alt="{{ $post->title }}">
+                <p class="card-text"><strong>Likes:</strong> {{ $post->likes }}</p>
             </div>
         </div>
+    </div>
+
+    <div class="container mt-4">
+        <form action="{{ route('post.editPage', ['post' => $post->id]) }}" method="GET">
+            @csrf
+            <button type="submit" class="btn btn-dark">Edit Post</button>
+        </form>
     </div>
 @endsection
